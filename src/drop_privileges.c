@@ -1,3 +1,25 @@
+/*
+Copyright (c) 2018 Andrew Holbrook <atholbro@gmail.com>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
 #include <unistd.h>
 #include <grp.h>
 #include <stdlib.h>
@@ -8,7 +30,10 @@
 #include <stdint.h>
 #include "drop_privileges.h"
 
-/* See: https://wiki.sei.cmu.edu/confluence/display/c/POS36-C.+Observe+correct+revocation+order+while+relinquishing+privileges */
+/* See:
+ * https://wiki.sei.cmu.edu/confluence/display/c/POS36-C.+Observe+correct+revocation+order+while+relinquishing+privileges
+ * https://www.safaribooksonline.com/library/view/secure-programming-cookbook/0596003943/ch01s03.html
+ */
 
 /* Returns nonzero if the two group lists are equivalent (taking into
    account that the lists may differ wrt the egid */
@@ -37,7 +62,6 @@ int eql_sups(const int cursups_size, const gid_t* const cursups_list,
 	return j == cursups_size ||
 		   (j+1 == cursups_size && cursups_list[j] == egid);
 }
-
 
 /* Sets the suplimentary group list, returns 0 if successful  */
 int set_sups(const int target_sups_size,const gid_t* const target_sups_list) {
