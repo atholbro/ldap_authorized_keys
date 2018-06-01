@@ -1,0 +1,27 @@
+Building:
+$ mkdir build
+$ cd build
+$ cmake ../
+$ make
+
+Installing:
+$ sudo chown root:root ldap_authorized_keys
+$ sudo chmod 4755 ldap_authorized_keys
+$ sudo mv ldap_authorized_keys /usr/local/bin
+
+Configure SSHd:
+$ sudo $EDITOR /etc/ssh/sshd_config
+
+AuthorizedKeysCommand /usr/local/bin/ldap_authorized_keys
+AuthorizedKeysCommandUser nobody
+
+Note:
+The ldap_authorized_keys executable must be owned by root, and only writable by root. These
+restrictions also apply to each directory in the path to the executable. For the example
+path given above, this means that the following permissions are required:
+
+drwxr-xr-x root root /usr
+drwxr-xr-x root root /usr/local
+drwxr-xr-x root root /usr/local/bin
+-rwsr-xr-x 1 root root 19616 May 31 16:23 /usr/local/bin/ldap_authorized_keys
+
