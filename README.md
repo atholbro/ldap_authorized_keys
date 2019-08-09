@@ -35,7 +35,7 @@ Finally restart sshd (sudo systemctl restart sshd) for the changes to take effec
 There are a few other projects which also provide authorized_keys via LDAP, however everyone I found required additional dependencies like python, perl or lua. A shell script should be avoided since setuid is likely disabled for shell scripts and your LDAP config should only be readable by root.
 
 The advantages of ldap_authorized_keys are:
-* Written in C, only dependicies are libldap.
+* Written in C, and the only dependency is libldap.
 * Reads nslcd.conf, no need to redefine LDAP configuration.
 * Supports setuid and dropping root, so that your LDAP configuration can remain secure.
-* Clear LDAP code should server as a good example for anyone else wanting to use libldap (existing examples are rare and docs forget to mention depercated function alternatives).
+* Clear LDAP code should serve as a good example for anyone else wanting to use libldap (existing examples are rare and docs forget to mention depercated function alternatives).
